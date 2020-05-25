@@ -35,9 +35,7 @@ namespace TaskManagementSystem.Controllers
         {
             try
             {
-                var context = new ApplicationDbContext();//new context for database
-                context.Roles.Add(new IdentityRole(role));//adding the rolee to database
-                context.SaveChanges();
+                UserHelper.CreateRole(role);
                 ViewBag.message = "Role Created";
                 return RedirectToAction("Index");
             }
@@ -53,12 +51,7 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddRoleToUser(string email,string role)
         {
-            var context = new ApplicationDbContext();
-            ApplicationUser user = context.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            userManager.AddToRole(user.Id, role);
-            context.SaveChanges();
+            UserHelper.AddUserToRole()
             ViewBag.message = "Role Added to User";
 
             var roleList = context.Roles.Select(roles => new SelectListItem { Value = roles.Name.ToString(), Text = roles.Name }).ToList();
