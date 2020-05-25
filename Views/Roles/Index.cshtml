@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Roles</h3>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Create A New Role</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("CreatingRole", "Roles",new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div>
+                Role name: @Html.TextBox("role")
+                <input type="submit" value="Create Role" class="btn-primary" />
+            </div>
+        }
+    </div> <!--End Panel Body-->
+</div> <!--End Panel-->
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Add a Role to a User</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("AddRoleToUser", "Roles",new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div>
+                <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
+                <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                <input type="submit" value="Add role" class="btn-primary" />
+            </div>
+        }
+    </div>
+</div> <!-- End Panel -->
+
+
+<div>@ViewBag.message</div>
