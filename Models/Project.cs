@@ -13,6 +13,7 @@ namespace TaskManagementSystem.Models
             this.Tasks = new HashSet<Task>();
             this.ProjectUsers = new HashSet<ProjectUser>();
         }
+
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
