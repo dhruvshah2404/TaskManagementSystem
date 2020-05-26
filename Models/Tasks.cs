@@ -6,7 +6,7 @@ using System.Web;
 
 namespace TaskManagementSystem.Models
 {
-	public class Task
+	public class Tasks
 	{
 		public int Id { get; set; }
 		[Required]
@@ -17,6 +17,6 @@ namespace TaskManagementSystem.Models
 		public int ProjectId { get; set; }
 		public virtual Project Project { get; set; }
 		public int UserId { get; set; }
-		public virtual User User { get; set; }
+		public virtual ApplicationUser User { get; set; }
 	}
 }

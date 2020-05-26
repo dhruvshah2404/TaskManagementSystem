@@ -10,7 +10,7 @@ namespace TaskManagementSystem.Models
     {
         public Project()
         {
-            this.Tasks = new HashSet<Task>();
+            this.Tasks = new HashSet<Tasks>();
             this.ProjectUsers = new HashSet<ProjectUser>();
         }
 
@@ -19,7 +19,7 @@ namespace TaskManagementSystem.Models
         public string Name { get; set; }
         public DateTime? Deadline { get; set; }
         public string Details { get; set; }
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Tasks> Tasks { get; set; }
         public ICollection<ProjectUser> ProjectUsers { get; set; }
     }
 }
