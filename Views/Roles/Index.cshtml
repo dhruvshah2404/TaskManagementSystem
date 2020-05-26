@@ -5,43 +5,103 @@
 
 <h3>Roles</h3>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h4>Create A New Role</h4>
-    </div>
-    <div class="panel-body">
-        @using (Html.BeginForm("CreatingRole", "Roles",new { @class = "form-horizontal" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+<div class="row col-sm-12 col-lg-12 col-md-12">
+    <div class="col-sm-6 col-lg-6 col-md-6">
 
-            <div>
-                Role name: @Html.TextBox("role")
-                <input type="submit" value="Create Role" class="btn-primary" />
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Create A New Role</h4>
             </div>
-        }
-    </div> <!--End Panel Body-->
-</div> <!--End Panel-->
+            <div class="panel-body">
+                @using (Html.BeginForm("CreatingRole", "Roles", new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
 
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h4>Add a Role to a User</h4>
-    </div>
-    <div class="panel-body">
-        @using (Html.BeginForm("AddRoleToUser", "Roles",new { @class = "form-horizontal" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-
-            <div>
-                <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
-                <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
-                <input type="submit" value="Add role" class="btn-primary" />
+                    <div>
+                        Role name: @Html.TextBox("role")
+                        <br />
+                        <br />
+                        <input type="submit" value="Create Role" class="btn-primary" />
+                    </div>
+                }
             </div>
-        }
+        </div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Add a Role to a User</h4>
+            </div>
+
+            <div class="panel-body">
+                @using (Html.BeginForm("AddRoleToUser", "Roles", new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div>
+                        <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
+                        <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                        <input type="submit" value="Add role" class="btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Remove Role from User</h4>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("RemoveRoleFromUser", "Roles"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
+                    <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                    <p><input type="submit" value="Delete this user from Role" class="btn-primary" /></p>
+
+                }
+            </div>
+        </div>
     </div>
-</div> <!-- End Panel -->
+
+    <div class="col-sm-6 col-lg-6 col-md-6">
+        <div class="panel panel-primary">
+            <h3 class="media-middle">
+                <b>
+                    &nbsp;
+                    <i class="fas fa-users"></i>
+                    @Html.ActionLink("Users", "Users")
+                </b>
+            </h3>
+        </div>
+        <div class="panel panel-primary">
+            <h3 class="media-middle">
+                <b>
+                    &nbsp;
+                    <i class="fas fa-folder"></i>
+                    @Html.ActionLink("Projects", "AllProjects", "Projects")
+                </b>
+            </h3>
+        </div>
+        <div class="panel panel-primary">
+            <h3 class="media-middle">
+                <b>
+                    &nbsp;
+                    <i class="fas fa-tasks"></i>
+                    @Html.ActionLink("Tasks", "AllTasks", "Tasks")
+                </b>
+            </h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="alert-info col-sm-12 col-lg-12 col-md-12">
+    @ViewBag.message
+</div>
 
 
-<div>@ViewBag.message</div>

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -29,5 +30,6 @@ namespace TaskManagementSystem.Models
         {
             return new ApplicationDbContext();
         }
+        public DbSet<Project> Projects { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
         //Add Role To User
-        public static bool AddUserToRole(string userId, string role)
+        public static bool AddRoleToUser(string userId, string role)
         {
             if (CheckIfUserIsInRole(userId, role))
             {
