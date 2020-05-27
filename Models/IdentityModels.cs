@@ -39,5 +39,7 @@ namespace TaskManagementSystem.Models
             return new ApplicationDbContext();
         }
         public DbSet<Project> Projects { get; set; }
-    }
+
+		public System.Data.Entity.DbSet<TaskManagementSystem.Models.Tasks> Tasks { get; set; }
+	}
 }

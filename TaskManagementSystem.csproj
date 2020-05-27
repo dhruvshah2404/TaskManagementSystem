@@ -168,6 +168,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\202005270549335_SolvedConflicts.cs" />
     <Compile Include="Migrations\202005270549335_SolvedConflicts.Designer.cs">
       <DependentUpon>202005270549335_SolvedConflicts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005272058014_task-functionality.cs" />
+    <Compile Include="Migrations\202005272058014_task-functionality.Designer.cs">
+      <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -270,6 +275,11 @@
     <Content Include="Views\Roles\AddUser.cshtml" />
     <Content Include="Views\Projects\Add.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005270549335_SolvedConflicts.resx">
       <DependentUpon>202005270549335_SolvedConflicts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005272058014_task-functionality.resx">
+      <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
