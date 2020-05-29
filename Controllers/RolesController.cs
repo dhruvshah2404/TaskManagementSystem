@@ -132,5 +132,10 @@ namespace TaskManagementSystem.Controllers
             ViewBag.Users = userList;
             return View();
         }
+        public ActionResult UserInfo(string UserId)
+        {
+            var user = db.Users.Find(UserId);
+            return View(user);
+        }
     }
 }

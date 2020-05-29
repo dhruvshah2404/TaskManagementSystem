@@ -73,22 +73,31 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddUser(int ProjectId, string UserId)
         {
-            var user = db.Users.Find(UserId);
-            var project = db.Projects.Find(ProjectId);
+
             var ProjectUser = new ProjectUser() { ProjectId = ProjectId, User_Id = UserId};
             if (ModelState.IsValid)
             {
-                if (!db.ProjectUsers.Any(p=>p.User_Id==UserId && p.ProjectId==ProjectId))
+                if (!db.ProjectUsers.Any(p => p.User_Id == UserId && p.ProjectId == ProjectId))
                 {
                     db.ProjectUsers.Add(ProjectUser);
-                    user.ProjectUsers.Add(ProjectUser);
-                    project.ProjectUsers.Add(ProjectUser);
                     db.SaveChanges();
                     ViewBag.message = "User Added Succesfully";
-                    return RedirectToAction("Info",new { id=ProjectId});
+                    return RedirectToAction("Info", new { id = ProjectId });
                 }
-            }
+                else
+                {
+                    ViewBag.message = "User Already there";
+                    return RedirectToAction("Info", new { id = ProjectId });
+                }
 
+            }
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+
+            var users = roleManager.FindByName("Developer").Users.Select(u => u.UserId).ToList();
+            var developers = db.Users.Where(e => users.Contains(e.Id)).ToList();
+
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.UserId = new SelectList(developers, "Id", "UserName");
             return View(ProjectUser);
         }
     }

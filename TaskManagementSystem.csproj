@@ -294,6 +294,7 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Projects\Info.cshtml" />
     <Content Include="Views\Projects\AddUser.cshtml" />
+    <Content Include="Views\Roles\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

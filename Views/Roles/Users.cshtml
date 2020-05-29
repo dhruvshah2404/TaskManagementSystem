@@ -33,7 +33,7 @@
             @foreach (var user in Model)
             {
                 <tr>
-                    <td>@user.Username</td>
+                    <td>@Html.ActionLink(user.Username,"UserInfo",new { UserId=user.UserId})</td>
                     <td>@user.Email</td>
                     <td>@user.Role</td>
 
