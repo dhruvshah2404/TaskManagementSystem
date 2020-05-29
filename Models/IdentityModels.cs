@@ -40,6 +40,8 @@ namespace TaskManagementSystem.Models
         }
         public DbSet<Project> Projects { get; set; }
 
-		public System.Data.Entity.DbSet<TaskManagementSystem.Models.Tasks> Tasks { get; set; }
-	}
+		public DbSet<Tasks> Tasks { get; set; }
+
+        public DbSet<ProjectUser> ProjectUsers { get; set; }
+    }
 }

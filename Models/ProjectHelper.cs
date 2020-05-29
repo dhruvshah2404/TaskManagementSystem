@@ -20,26 +20,22 @@ namespace TaskManagementSystem.Models
 		}
 
 		// Delete() for deleting projects from the database
-		public static bool Delete(string name)
+		public static bool Delete(int id)
 		{
-			var project = new Project() { Name = name };
-			if (db.Projects.Contains(project))
-			{
-				db.Projects.Remove(project);
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;// no project with this name
-			}
+			var project = db.Projects.Find(id);
+			
+			db.Projects.Remove(project);
+			db.SaveChanges();
+			return true;
+		
 		}
 
 		// Update() for Updating Projects to the database
 		public static bool Update()
 		{
 			return true;
-		}
 
+		}
+		
 	}
 }

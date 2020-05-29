@@ -15,11 +15,11 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
             <div>
-                Project Name: @Html.TextBox("name")<br /><br />
-                Customer Name: @Html.TextBox("customerName")<br /><br />
-                Due Date: @Html.EditorFor(model=>model.Deadline)
+
+                Project Name:@Html.Editor("name", new { htmlAttributes = new { @class = "form-control" } })<br />
+                Customer Name: @Html.Editor("customerName", new { htmlAttributes = new { @class = "form-control" } })<br />
+                Due Date: @Html.EditorFor(model => model.Deadline ,new { htmlAttributes = new { @class = "form-control" } })
                 <br /><br />
                 <input type="submit" value="Create Project" class="btn-primary" />
             </div>

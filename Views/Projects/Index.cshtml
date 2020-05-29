@@ -29,15 +29,19 @@
                     <td><b>Project Name</b></td>
                     <td><b>Customer Name</b></td>
                     <td><b>Due Date</b></td>
+                    <td><b>Modification</b></td>
                 </tr>
             </thead>
             @foreach (var project in Model)
             {
                 <tr>
-                    <td>@project.Name</td>
+                    <td>@Html.ActionLink(@project.Name, "Info", new { id = project.Id })</td>
                     <td>@project.CustomerName</td>
                     <td>@project.Deadline</td>
-
+                    <td class="col-sm-1 col-lg-1 col-md-1">
+                        @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
+                        <span onclick="return confirm('Are you sure to delete?')"><a href="/Projects/Delete?ProjectId=@project.Id" class="delLink" style="color:red;">Delete</a></span>
+                    </td>
                 </tr>
 
             }
@@ -45,9 +49,13 @@
     </div>
 </div>
 
-
 <div>
-    @Html.ActionLink("Back", "Index")
+    @Html.ActionLink("Back", "Index", "Roles")
+</div>
+
+
+<div class="alert-info col-sm-12 col-lg-12 col-md-12">
+    @ViewBag.message
 </div>
 
 @section scripts{

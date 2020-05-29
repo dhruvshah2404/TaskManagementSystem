@@ -200,6 +200,18 @@
     <Compile Include="Migrations\202005272058014_task-functionality.Designer.cs">
       <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005281442144_changeduserIdType.cs" />
+    <Compile Include="Migrations\202005281442144_changeduserIdType.Designer.cs">
+      <DependentUpon>202005281442144_changeduserIdType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005281447145_removedintuserId.cs" />
+    <Compile Include="Migrations\202005281447145_removedintuserId.Designer.cs">
+      <DependentUpon>202005281447145_removedintuserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005290044405_changedforeignkeyforuser.cs" />
+    <Compile Include="Migrations\202005290044405_changedforeignkeyforuser.Designer.cs">
+      <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -280,6 +292,8 @@
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Projects\Info.cshtml" />
+    <Content Include="Views\Projects\AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -318,6 +332,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005272058014_task-functionality.resx">
       <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005281442144_changeduserIdType.resx">
+      <DependentUpon>202005281442144_changeduserIdType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005281447145_removedintuserId.resx">
+      <DependentUpon>202005281447145_removedintuserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005290044405_changedforeignkeyforuser.resx">
+      <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

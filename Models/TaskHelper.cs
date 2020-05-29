@@ -38,18 +38,18 @@ namespace TaskManagementSystem.Models
 		}
 
 		// Delete Task
-		public static bool Delete(int taskId)
-		{			
+		public static bool Delete(int projectId,int taskId)
+		{
 			// delete from the project
-			var project = db.Projects.FirstOrDefault(p => p.Tasks.Any(t => t.Id == taskId));
+			var project = db.Projects.FirstOrDefault(p => p.Id == projectId);
+			//var project = db.Projects.FirstOrDefault(p => p.Tasks.Any(t => t.Id == taskId));
 			var task = project.Tasks.FirstOrDefault(t => t.Id == taskId);
 			project.Tasks.Remove(task);
-			db.SaveChanges();
 
 			//  if any user contains the task, then delete it as well.
 			var userContainingTask = db.Users.FirstOrDefault(u => u.Tasks.Contains(task));
 			userContainingTask.Tasks.Remove(task);
-			db.SaveChanges();	
+			db.SaveChanges();
 
 			return true;
 		}

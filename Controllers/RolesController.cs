@@ -100,7 +100,7 @@ namespace TaskManagementSystem.Controllers
                                       RoleNames = (from userRole in user.Roles
                                                    join role in db.Roles on userRole.RoleId
                                                    equals role.Id
-                                                   select role.Name).ToList()
+                                                   select role.Name=="developer").ToList()
                                   }).ToList().Select(p => new UserViewModel()
 
                                   {
