@@ -4,10 +4,11 @@
 }
 
 <h2>UserInfo</h2>
+username: @Model.UserName
 
 <ol>
     @foreach (var project in Model.ProjectUsers)
     {
-        <li>@project.Id</li>
+        <li>@project.Project.Name</li>
     }
 </ol>

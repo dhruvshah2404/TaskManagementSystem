@@ -21,7 +21,7 @@
             </thead>
             <tr>
                 <td>@Model.Name</td>
-                <td>@Model.CustomerName</td>
+                <td>@Model.Customer</td>
                 <td>@Model.Deadline</td>
             </tr>
         </table>
@@ -51,7 +51,7 @@
             {
                 <tr>
                     <td>@user.User.UserName</td>
-                    <td>@Html.ActionLink("Assign","Add","Tasks")</td>
+                    <td>@Html.ActionLink("Assign","Create","Tasks")</td>
                     <td>@Html.ActionLink("Remove","RemoveFromProject","Projects")</td>
                 </tr>
             }

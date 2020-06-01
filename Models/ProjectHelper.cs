@@ -12,7 +12,7 @@ namespace TaskManagementSystem.Models
 		// Add() for adding projects to the database
 		public static bool AddProject(string name, string customerName, DateTime? deadline)
 		{
-			Project project = new Project() { Name = name, CustomerName = customerName, Deadline = deadline };
+			Project project = new Project() { Name = name, Customer = customerName, Deadline = deadline };
 			
 				db.Projects.Add(project);
 				db.SaveChanges();

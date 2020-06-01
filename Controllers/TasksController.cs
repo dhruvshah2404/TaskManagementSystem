@@ -13,12 +13,14 @@ namespace TaskManagementSystem.Controllers
     [Authorize(Roles = "Project Manager")]
     public class TasksController : Controller
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            var tasks = db.Tasks.Include(t => t.Project);
+            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.User);
             return View(tasks.ToList());
         }
 
@@ -41,15 +43,16 @@ namespace TaskManagementSystem.Controllers
         public ActionResult Create()
         {
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
         // POST: Tasks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +62,7 @@ namespace TaskManagementSystem.Controllers
             }
 
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
             return View(tasks);
         }
 
@@ -75,15 +79,16 @@ namespace TaskManagementSystem.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
             return View(tasks);
         }
 
         // POST: Tasks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +97,7 @@ namespace TaskManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
             return View(tasks);
         }
 

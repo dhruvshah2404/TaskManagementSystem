@@ -17,9 +17,9 @@ namespace TaskManagementSystem.Controllers
         public ActionResult Index()
         {
 
-            var roleList = db.Roles.Select(roles => new SelectListItem {Value=roles.Name.ToString(),Text=roles.Name }).ToList();
+            var roleList = db.Roles.Select(roles => new SelectListItem { Value = roles.Name.ToString(), Text = roles.Name }).ToList();
             ViewBag.Roles = roleList;
-            var userList = db.Users.Select(users => new SelectListItem {Value=users.UserName.ToString(),Text= users.UserName }).ToList();
+            var userList = db.Users.Select(users => new SelectListItem { Value = users.UserName.ToString(), Text = users.UserName }).ToList();
             ViewBag.Users = userList;
 
             return View();
@@ -48,10 +48,10 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddRoleToUser(string email,string role)
+        public ActionResult AddRoleToUser(string email, string role)
         {
             ApplicationUser user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
-            if(UserHelper.AddRoleToUser(user.Id, role))
+            if (UserHelper.AddRoleToUser(user.Id, role))
             {
                 ViewBag.message = "Role Added to User";
             }
@@ -71,12 +71,12 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult RemoveRoleFromUser(string email, string role) 
+        public ActionResult RemoveRoleFromUser(string email, string role)
         {
             ApplicationUser user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
             if (UserHelper.RemoveUserFromRole(user.Id, role))
-            { 
-                ViewBag.message = "Role Removed from User"; 
+            {
+                ViewBag.message = "Role Removed from User";
             }
             else
             {
@@ -100,7 +100,7 @@ namespace TaskManagementSystem.Controllers
                                       RoleNames = (from userRole in user.Roles
                                                    join role in db.Roles on userRole.RoleId
                                                    equals role.Id
-                                                   select role.Name=="developer").ToList()
+                                                   select role.Name).ToList()
                                   }).ToList().Select(p => new UserViewModel()
 
                                   {
@@ -120,7 +120,7 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddUser(string email,string role)
+        public ActionResult AddUser(string email, string role)
         {
             UserHelper.CreateUser(email);
             ApplicationUser user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
@@ -132,10 +132,6 @@ namespace TaskManagementSystem.Controllers
             ViewBag.Users = userList;
             return View();
         }
-        public ActionResult UserInfo(string UserId)
-        {
-            var user = db.Users.Find(UserId);
-            return View(user);
-        }
+
     }
 }
