@@ -17,7 +17,6 @@ namespace TaskManagementSystem.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks
-        [AllowAnonymous]
         public ActionResult Index()
         {
             var tasks = db.Tasks.Include(t => t.Project).Include(t => t.User);
@@ -96,6 +95,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: Tasks/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,7 +111,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // POST: Tasks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -129,12 +129,14 @@ namespace TaskManagementSystem.Controllers
             }
             base.Dispose(disposing);
         }
-        //[OverrideAuthorization]
-        //[Authorize(Roles ="Developer")]
-        //public ActionResult GetAllTasks(string id)
-        //{
-        //    var tasks = db.Tasks.Where(t => t.UserId == id).ToList();
-        //    return View();
-        //}
+
+        [OverrideAuthorization]
+        [Authorize(Roles ="Developer")]
+        public ActionResult GetAllDeveloperTasks(string developerId)
+        {
+            var result = db.Tasks.Where(task => task.UserId == developerId).ToList();
+            return View(result);
+        }
+
     }
 }
