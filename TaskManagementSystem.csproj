@@ -236,6 +236,14 @@
     <Compile Include="Migrations\202006011835215_changedcustomername.Designer.cs">
       <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.cs" />
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.Designer.cs">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.cs" />
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.Designer.cs">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -319,6 +327,7 @@
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\GetAllDeveloperTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -384,6 +393,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006011835215_changedcustomername.resx">
       <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.resx">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006022030304_AddGetAllDeveloperTasks.resx">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
