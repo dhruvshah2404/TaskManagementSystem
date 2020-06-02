@@ -27,7 +27,9 @@ namespace TaskManagementSystem.Migrations
             //Create Role for User
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var ProjectManagerRole = new IdentityRole("Project Manager");
+            var DeveloperRole = new IdentityRole("Developer");
             roleManager.Create(ProjectManagerRole);
+            roleManager.Create(DeveloperRole);
             context.SaveChanges();
 
             //Assign Role to User

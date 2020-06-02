@@ -212,6 +212,41 @@
     <Compile Include="Migrations\202005290044405_changedforeignkeyforuser.Designer.cs">
       <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005292108029_deleteduserId.cs" />
+    <Compile Include="Migrations\202005292108029_deleteduserId.Designer.cs">
+      <DependentUpon>202005292108029_deleteduserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005292131506_ChangedRelationship.cs" />
+    <Compile Include="Migrations\202005292131506_ChangedRelationship.Designer.cs">
+      <DependentUpon>202005292131506_ChangedRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005292148474_deletedprojectuser.cs" />
+    <Compile Include="Migrations\202005292148474_deletedprojectuser.Designer.cs">
+      <DependentUpon>202005292148474_deletedprojectuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005312237184_addednametotask.cs" />
+    <Compile Include="Migrations\202005312237184_addednametotask.Designer.cs">
+      <DependentUpon>202005312237184_addednametotask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006011814355_createdProjectUser.cs" />
+    <Compile Include="Migrations\202006011814355_createdProjectUser.Designer.cs">
+      <DependentUpon>202006011814355_createdProjectUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006011835215_changedcustomername.cs" />
+    <Compile Include="Migrations\202006011835215_changedcustomername.Designer.cs">
+      <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.cs" />
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.Designer.cs">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.cs" />
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.Designer.cs">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.cs" />
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.Designer.cs">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -287,14 +322,15 @@
     <Content Include="Views\Roles\AddUser.cshtml" />
     <Content Include="Views\Projects\Add.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\Info.cshtml" />
+    <Content Include="Views\Projects\AddUser.cshtml" />
+    <Content Include="Views\Projects\UserInfo.cshtml" />
     <Content Include="Views\Tasks\Create.cshtml" />
     <Content Include="Views\Tasks\Delete.cshtml" />
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Projects\Info.cshtml" />
-    <Content Include="Views\Projects\AddUser.cshtml" />
-    <Content Include="Views\Roles\UserInfo.cshtml" />
+    <Content Include="Views\Tasks\GetAllDeveloperTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -342,6 +378,32 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005290044405_changedforeignkeyforuser.resx">
       <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292108029_deleteduserId.resx">
+      <DependentUpon>202005292108029_deleteduserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292131506_ChangedRelationship.resx">
+      <DependentUpon>202005292131506_ChangedRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292148474_deletedprojectuser.resx">
+      <DependentUpon>202005292148474_deletedprojectuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005312237184_addednametotask.resx">
+      <DependentUpon>202005312237184_addednametotask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006011814355_createdProjectUser.resx">
+      <DependentUpon>202006011814355_createdProjectUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006011835215_changedcustomername.resx">
+      <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.resx">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006022030304_AddGetAllDeveloperTasks.resx">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.resx">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,10 +12,10 @@
     <div class="form-horizontal">
         <input type="text" class="hidden" name="ProjectId" value="@ViewBag.Project" />
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Id, "Developers", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model =>model.Id, "Developers", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("UserId", null,"Select ...",new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.User_Id, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
             </div>
         </div>
 

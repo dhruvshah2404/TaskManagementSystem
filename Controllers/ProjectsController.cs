@@ -12,13 +12,12 @@ using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Controllers
 {
+    [Authorize(Roles = "Project Manager")]
     public class ProjectsController : Controller
     {
-        public ProjectsController()
-        {
-
-        }
+     
         private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Projects
         public ActionResult Index()
         {
@@ -36,13 +35,14 @@ namespace TaskManagementSystem.Controllers
             ViewBag.message = "Project created succesfully";
             return View();
         }
-
+        
         public ActionResult Delete(int ProjectId)
         {
             ProjectHelper.Delete(ProjectId);
             ViewBag.message = "Project Deleted";
             return RedirectToAction("Index");
         }
+
         public ActionResult Info(int? id)
         {
             if (id == null)
@@ -60,8 +60,8 @@ namespace TaskManagementSystem.Controllers
         public ActionResult AddUser(int projectId)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-
-            var users=roleManager.FindByName("Developer").Users.Select(u=>u.UserId).ToList();
+            
+            var users = roleManager.FindByName("Developer").Users.Select(u => u.UserId).ToList();
             var developers = db.Users.Where(e => users.Contains(e.Id)).ToList();
 
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
@@ -74,14 +74,14 @@ namespace TaskManagementSystem.Controllers
         public ActionResult AddUser(int ProjectId, string UserId)
         {
 
-            var ProjectUser = new ProjectUser() { ProjectId = ProjectId, User_Id = UserId};
+
+            var ProjectUser = new ProjectUser() { ProjectId = ProjectId, UserId = UserId };
             if (ModelState.IsValid)
             {
-                if (!db.ProjectUsers.Any(p => p.User_Id == UserId && p.ProjectId == ProjectId))
+                if (!db.ProjectUsers.Any(p=>p.ProjectId==ProjectId && p.UserId==UserId))
                 {
                     db.ProjectUsers.Add(ProjectUser);
                     db.SaveChanges();
-                    ViewBag.message = "User Added Succesfully";
                     return RedirectToAction("Info", new { id = ProjectId });
                 }
                 else
@@ -89,7 +89,6 @@ namespace TaskManagementSystem.Controllers
                     ViewBag.message = "User Already there";
                     return RedirectToAction("Info", new { id = ProjectId });
                 }
-
             }
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
@@ -100,5 +99,13 @@ namespace TaskManagementSystem.Controllers
             ViewBag.UserId = new SelectList(developers, "Id", "UserName");
             return View(ProjectUser);
         }
+
+        public ActionResult UserInfo(string UserId)
+        {
+            var user = db.Users.Find(UserId);
+            return View(user);
+        }
     }
+
 }
+            

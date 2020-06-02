@@ -13,25 +13,19 @@ namespace TaskManagementSystem.Models
 		// Can only be accessed by Project Managers
 
 		// Add Task
-		public static bool Add(string description, int projectId, string userId)
+		public static bool Add(string name,string description, int projectId, string userId, DateTime submissionDate)
 		{
 			// create a new task object
-			Tasks newTask = new Tasks();
+			Tasks newTask = new Tasks() { IsCompleted = false,percentageCompleted=0};
 
 			// add all the data inside
+			newTask.Name = name;
 			newTask.Description = description;
 			newTask.ProjectId = projectId;
-			
-			var project = db.Projects.FirstOrDefault(p => p.Id == projectId);
-			newTask.Project = project;
-			
 			newTask.UserId = userId;
-
-			var user = db.Users.FirstOrDefault(u => u.Id == userId);
-			newTask.User = user;
-
+			newTask.SubmissionDate = submissionDate;
 			// put it in the database
-			project.Tasks.Add(newTask);
+			db.Tasks.Add(newTask);
 			db.SaveChanges();
 
 			return true;
@@ -60,19 +54,5 @@ namespace TaskManagementSystem.Models
 			return true;
 		}
 
-		// Assign a task to a number of Developers
-		public static bool AssignTaskToDeveloper(Tasks task, string developerId)
-		{
-			// find the task inside the db
-			var result = db.Projects.Where(p => p.Tasks.Contains(task)).Select(pr => pr.Tasks.FirstOrDefault(tsk => tsk.Id == task.Id)).First();
-
-			// from the user's side, add the side
-			var user = db.Users.FirstOrDefault(u => u.Id == developerId);
-
-			user.Tasks.Add(result);
-
-			db.SaveChanges();
-			return true;
-		}
 	}
 }

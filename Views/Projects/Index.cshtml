@@ -36,7 +36,7 @@
             {
                 <tr>
                     <td>@Html.ActionLink(@project.Name, "Info", new { id = project.Id })</td>
-                    <td>@project.CustomerName</td>
+                    <td>@project.Customer</td>
                     <td>@project.Deadline</td>
                     <td class="col-sm-1 col-lg-1 col-md-1">
                         @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |

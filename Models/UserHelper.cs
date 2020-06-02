@@ -72,6 +72,7 @@ namespace TaskManagementSystem.Models
             }
             else
             {
+               
                 userManager.AddToRole(userId, role);
                 db.SaveChanges();
                 return true;

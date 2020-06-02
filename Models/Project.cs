@@ -21,7 +21,7 @@ namespace TaskManagementSystem.Models
         [DisplayName("DeadLine")]
         [DataType(DataType.Date)]
         public DateTime? Deadline { get; set; }
-        public string CustomerName { get; set; }
+        public string Customer { get; set; }
         public ICollection<Tasks> Tasks { get; set; }
         public ICollection<ProjectUser> ProjectUsers { get; set; }
     }
