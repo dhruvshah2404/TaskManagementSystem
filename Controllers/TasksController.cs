@@ -17,7 +17,6 @@ namespace TaskManagementSystem.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks
-        [AllowAnonymous]
         public ActionResult Index()
         {
             var tasks = db.Tasks.Include(t => t.Project).Include(t => t.User);
@@ -129,12 +128,12 @@ namespace TaskManagementSystem.Controllers
             }
             base.Dispose(disposing);
         }
-        //[OverrideAuthorization]
-        //[Authorize(Roles ="Developer")]
-        //public ActionResult GetAllTasks(string id)
-        //{
-        //    var tasks = db.Tasks.Where(t => t.UserId == id).ToList();
-        //    return View();
-        //}
+        [OverrideAuthorization]
+        [Authorize(Roles = "Developer")]
+        public ActionResult GetAllTasks(string id)
+        {
+            var tasks = db.Tasks.Where(t => t.UserId == id).ToList();
+            return View(tasks);
+        }
     }
 }
