@@ -243,6 +243,9 @@
     <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.cs" />
     <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.Designer.cs">
       <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.cs" />
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.Designer.cs">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -399,6 +402,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006022030304_AddGetAllDeveloperTasks.resx">
       <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.resx">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

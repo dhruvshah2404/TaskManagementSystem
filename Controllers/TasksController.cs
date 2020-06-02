@@ -39,10 +39,10 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: Tasks/Create
-        public ActionResult Create()
+        public ActionResult Create(int projectId,string userId)
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
+            ViewBag.ProjectId = projectId;
+            ViewBag.UserId = userId;
             return View();
         }
 
@@ -51,18 +51,13 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
+        public ActionResult Create(string name, string description, int projectId, string userId,DateTime SubmissionDate)
         {
             if (ModelState.IsValid)
             {
-                db.Tasks.Add(tasks);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                TaskHelper.Add(name, description, projectId, userId, SubmissionDate);
             }
-
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
-            return View(tasks);
+            return RedirectToAction("Info","Projects",new { id=projectId });
         }
 
         // GET: Tasks/Edit/5
@@ -77,8 +72,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
+          
             return View(tasks);
         }
 
@@ -140,9 +134,6 @@ namespace TaskManagementSystem.Controllers
         [Authorize(Roles ="Developer")]
         public ActionResult GetAllDeveloperTasks(string developerId)
         {
-            // we find the developer
-            // and we grab all of his projects
-
             var result = db.Tasks.Where(task => task.UserId == developerId).ToList();
             return View(result);
         }

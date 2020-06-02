@@ -51,7 +51,7 @@
             {
                 <tr>
                     <td>@user.User.UserName</td>
-                    <td>@Html.ActionLink("Assign","Create","Tasks")</td>
+                    <td><a href="/Tasks/Create?projectId=@Model.Id&userId=@user.UserId">Assign</a></td>
                     <td>@Html.ActionLink("Remove","RemoveFromProject","Projects")</td>
                 </tr>
             }
