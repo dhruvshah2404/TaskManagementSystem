@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -157,9 +156,6 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -170,7 +166,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,12 +180,84 @@
     <Compile Include="Migrations\202005250031438_AddedSeedMethodUserandRole.Designer.cs">
       <DependentUpon>202005250031438_AddedSeedMethodUserandRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005260059575_AddedUSerViewModel.cs" />
+    <Compile Include="Migrations\202005260059575_AddedUSerViewModel.Designer.cs">
+      <DependentUpon>202005260059575_AddedUSerViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005260351011_AddedRequiredClasses.cs" />
+    <Compile Include="Migrations\202005260351011_AddedRequiredClasses.Designer.cs">
+      <DependentUpon>202005260351011_AddedRequiredClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005260402568_DeletedUserClass.cs" />
+    <Compile Include="Migrations\202005260402568_DeletedUserClass.Designer.cs">
+      <DependentUpon>202005260402568_DeletedUserClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005270549335_SolvedConflicts.cs" />
+    <Compile Include="Migrations\202005270549335_SolvedConflicts.Designer.cs">
+      <DependentUpon>202005270549335_SolvedConflicts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005272058014_task-functionality.cs" />
+    <Compile Include="Migrations\202005272058014_task-functionality.Designer.cs">
+      <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005281442144_changeduserIdType.cs" />
+    <Compile Include="Migrations\202005281442144_changeduserIdType.Designer.cs">
+      <DependentUpon>202005281442144_changeduserIdType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005281447145_removedintuserId.cs" />
+    <Compile Include="Migrations\202005281447145_removedintuserId.Designer.cs">
+      <DependentUpon>202005281447145_removedintuserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005290044405_changedforeignkeyforuser.cs" />
+    <Compile Include="Migrations\202005290044405_changedforeignkeyforuser.Designer.cs">
+      <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005292108029_deleteduserId.cs" />
+    <Compile Include="Migrations\202005292108029_deleteduserId.Designer.cs">
+      <DependentUpon>202005292108029_deleteduserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005292131506_ChangedRelationship.cs" />
+    <Compile Include="Migrations\202005292131506_ChangedRelationship.Designer.cs">
+      <DependentUpon>202005292131506_ChangedRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005292148474_deletedprojectuser.cs" />
+    <Compile Include="Migrations\202005292148474_deletedprojectuser.Designer.cs">
+      <DependentUpon>202005292148474_deletedprojectuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005312237184_addednametotask.cs" />
+    <Compile Include="Migrations\202005312237184_addednametotask.Designer.cs">
+      <DependentUpon>202005312237184_addednametotask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006011814355_createdProjectUser.cs" />
+    <Compile Include="Migrations\202006011814355_createdProjectUser.Designer.cs">
+      <DependentUpon>202006011814355_createdProjectUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006011835215_changedcustomername.cs" />
+    <Compile Include="Migrations\202006011835215_changedcustomername.Designer.cs">
+      <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.cs" />
+    <Compile Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.Designer.cs">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.cs" />
+    <Compile Include="Migrations\202006022030304_AddGetAllDeveloperTasks.Designer.cs">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.cs" />
+    <Compile Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.Designer.cs">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\UserManager.cs" />
+    <Compile Include="Models\ProjectHelper.cs" />
+    <Compile Include="Models\ProjectUser.cs" />
+    <Compile Include="Models\TaskHelper.cs" />
+    <Compile Include="Models\Tasks.cs" />
+    <Compile Include="Models\UserHelper.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -248,6 +318,19 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\Users.cshtml" />
+    <Content Include="Views\Roles\AddUser.cshtml" />
+    <Content Include="Views\Projects\Add.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\Info.cshtml" />
+    <Content Include="Views\Projects\AddUser.cshtml" />
+    <Content Include="Views\Projects\UserInfo.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\GetAllDeveloperTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,6 +354,56 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005250031438_AddedSeedMethodUserandRole.resx">
       <DependentUpon>202005250031438_AddedSeedMethodUserandRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005260059575_AddedUSerViewModel.resx">
+      <DependentUpon>202005260059575_AddedUSerViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005260351011_AddedRequiredClasses.resx">
+      <DependentUpon>202005260351011_AddedRequiredClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005260402568_DeletedUserClass.resx">
+      <DependentUpon>202005260402568_DeletedUserClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005270549335_SolvedConflicts.resx">
+      <DependentUpon>202005270549335_SolvedConflicts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005272058014_task-functionality.resx">
+      <DependentUpon>202005272058014_task-functionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005281442144_changeduserIdType.resx">
+      <DependentUpon>202005281442144_changeduserIdType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005281447145_removedintuserId.resx">
+      <DependentUpon>202005281447145_removedintuserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005290044405_changedforeignkeyforuser.resx">
+      <DependentUpon>202005290044405_changedforeignkeyforuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292108029_deleteduserId.resx">
+      <DependentUpon>202005292108029_deleteduserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292131506_ChangedRelationship.resx">
+      <DependentUpon>202005292131506_ChangedRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005292148474_deletedprojectuser.resx">
+      <DependentUpon>202005292148474_deletedprojectuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005312237184_addednametotask.resx">
+      <DependentUpon>202005312237184_addednametotask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006011814355_createdProjectUser.resx">
+      <DependentUpon>202006011814355_createdProjectUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006011835215_changedcustomername.resx">
+      <DependentUpon>202006011835215_changedcustomername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006012036413_AddDeveloperRoleInSeedMethod.resx">
+      <DependentUpon>202006012036413_AddDeveloperRoleInSeedMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006022030304_AddGetAllDeveloperTasks.resx">
+      <DependentUpon>202006022030304_AddGetAllDeveloperTasks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006012024043_changeddatetypeofsubmissiondate.resx">
+      <DependentUpon>202006012024043_changeddatetypeofsubmissiondate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -301,12 +434,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

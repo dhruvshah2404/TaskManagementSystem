@@ -1,0 +1,14 @@
+﻿@model TaskManagementSystem.Models.ApplicationUser
+@{
+    ViewBag.Title = "UserInfo";
+}
+
+<h2>UserInfo</h2>
+username: @Model.UserName
+
+<ol>
+    @foreach (var project in Model.ProjectUsers)
+    {
+        <li>@project.Project.Name</li>
+    }
+</ol>

@@ -1,0 +1,29 @@
+﻿@model List<TaskManagementSystem.Models.Tasks>
+@{
+	ViewBag.Title = "GetAllDeveloperTasks";
+}
+
+<h2>Get All Developer Tasks</h2>
+
+<table class="table">
+	<tr>
+		<th>Project ID</th>
+		<th>Developer</th>
+		<th>Description</th>
+		<th>Progress</th>
+		<th>Status</th>
+		<th>Submission Date</th>
+	</tr>
+
+	@foreach (var task in Model)
+	{
+		<tr>
+			<td>@Html.DisplayFor(modelItem => task.ProjectId)</td>
+			<td>@Html.DisplayFor(modelItem => task.User.UserName)</td>
+			<td>@Html.DisplayFor(modelItem => task.Description)</td>
+			<td>@Html.DisplayFor(modelItem => task.percentageCompleted)</td>
+			<td>@Html.DisplayFor(modelItem => task.IsCompleted)</td>
+			<td>@Html.DisplayFor(modelItem => task.SubmissionDate)</td>
+		</tr>
+	}
+</table>
