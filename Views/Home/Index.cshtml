@@ -1,12 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity;
+@{
     ViewBag.Title = "Home Page";
+    var currentUser = @User.Identity.GetUserId();
 }
 
 <div class="jumbotron">
     <h2>Welcome to JDJ Task Management System</h2>
-   
+
 </div>
 
+<a href="/Tasks/GetAllTasks?id=@currentUser">All Tasks</a>
 <div class="row">
     <div class="col-md-4">
     </div>

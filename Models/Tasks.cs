@@ -15,6 +15,7 @@ namespace TaskManagementSystem.Models
 		public string Description { get; set; }
 		public int? percentageCompleted { get; set; }
 		public bool? IsCompleted { get; set; }
+		[DataType(DataType.Date)]
 		public DateTime? SubmissionDate { get; set; }
 		public int ProjectId { get; set; }
 		public virtual Project Project { get; set; }
