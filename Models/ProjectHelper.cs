@@ -10,9 +10,9 @@ namespace TaskManagementSystem.Models
 		static ApplicationDbContext db = new ApplicationDbContext();// the database
 
 		// Add() for adding projects to the database
-		public static bool AddProject(string name, string customerName, DateTime? deadline)
+		public static bool AddProject(string name, string customerName, DateTime? deadline,Priority priority)
 		{
-			Project project = new Project() { Name = name, Customer = customerName, Deadline = deadline };
+			Project project = new Project() { Name = name, Customer = customerName, Deadline = deadline,Priority=priority };
 			
 				db.Projects.Add(project);
 				db.SaveChanges();
@@ -36,6 +36,7 @@ namespace TaskManagementSystem.Models
 			return true;
 
 		}
+
 		
 	}
 }

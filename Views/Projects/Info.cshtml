@@ -3,13 +3,13 @@
     ViewBag.Title = "Info";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
+<div class="card card-body">
+    <div class="card-header">
         <h3 class="box-title">
             <b>Projects Info</b>
         </h3>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
 
             <thead>
@@ -28,16 +28,17 @@
     </div>
 </div>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
+<div class="card card-body">
+    <div class="card-header">
         <h3 class="box-title">
             <b>Developers</b>
         </h3>
     </div>
-                
-    <h3 style="padding:15px;margin:0px;padding-bottom:0"><i class="fas fa-user"></i>&nbsp;&nbsp;<a href="/Projects/AddUser?projectId=@Model.Id">Add Developer</a></h3>
-    
-    <div class="panel-body">
+
+    <h3 style="padding:15px;margin:0px;padding-bottom:0"><i class="fas fa-user"></i>&nbsp;&nbsp;
+    @Html.ActionLink("Add Developer","AddUser",new { projectId=@Model.Id})
+    </h3>
+    <div class="card-body">
         <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
 
             <thead>
@@ -49,11 +50,14 @@
             </thead>
             @foreach (var user in Model.ProjectUsers)
             {
-                <tr>
-                    <td>@user.User.UserName</td>
-                    <td><a href="/Tasks/Create?projectId=@Model.Id&userId=@user.UserId">Assign</a></td>
-                    <td>@Html.ActionLink("Remove","RemoveFromProject","Projects")</td>
-                </tr>
+        <tr>
+            <td>@user.User.UserName</td>
+            <td><a href="/Tasks/Create?projectId=@Model.Id&userId=@user.UserId">Assign</a></td>
+            <td>
+            <span onclick="return confirm('Are you sure to delete?')"><a href="/Projects/RemoveFromProject?ProjectId=@Model.Id&userId=@user.UserId" class="delLink" style="color:red;">Remove</a></span>
+            </td>
+           
+        </tr>
             }
 
         </table>
@@ -61,4 +65,44 @@
 
 </div>
 
+
+<div class="card card-body">
+    <div class="card-header">
+        <h3 class="box-title">
+            <b>Tasks</b>
+        </h3>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+
+            <thead>
+                <tr>
+                    <td><b>Task Name</b></td>
+                    <td><b>Developer</b></td>
+                    <td><b>Submission Date</b></td>
+                    <td><b>Completed?</b></td>
+
+                </tr>
+            </thead>
+            @foreach (var task in Model.Tasks)
+            {
+                <tr>
+                    <td>@task.Name</td>
+                    <td>@task.User.UserName</td>
+                    <td>@task.SubmissionDate</td>
+                    <td>@task.IsCompleted</td>
+                    @if (task.IsCompleted == true)
+                    {
+                        <td>@Html.ActionLink("Hide","RemoveTask",new {taskId=@task.Id,projectId=@Model.Id })</td>
+                    }
+
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</div>
+<h4>@Html.ActionLink("Back", "Index")</h4>
 

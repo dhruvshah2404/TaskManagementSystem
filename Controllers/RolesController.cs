@@ -51,7 +51,7 @@ namespace TaskManagementSystem.Controllers
         public ActionResult AddRoleToUser(string email, string role)
         {
             ApplicationUser user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
-            if (UserHelper.AddRoleToUser(user.Id, role))
+             if (UserHelper.AddRoleToUser(user.Id, role))
             {
                 ViewBag.message = "Role Added to User";
             }

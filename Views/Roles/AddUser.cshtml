@@ -3,30 +3,32 @@
     ViewBag.Title = "AddUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 
-<h2>AddUser</h2>
-<div class="panel panel-primary">
+<div class="card card-body">
 
-    <div class="panel-heading">
+    <div class="card-header bg-dark text-light">
         <h4>Add a Role to a User</h4>
     </div>
-    <div class="panel-body">
+    <div class="card-body ">
         @using (Html.BeginForm("AddUser", "Roles", new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
             <div>
-                Email: @Html.TextBox("email")<br /><br />
+                Email: @Html.TextBox("email", "", new { @class = "form-control" })<br />
                 <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
-                <input type="submit" value="Create User" class="btn-primary" />
+                <input type="submit" value="Create User" class="btn btn-primary" />
             </div>
         }
     </div>
 </div>
 
 <div>
-    @Html.ActionLink("Back", "Index")
+    <h4>
+        @Html.ActionLink("Back", "Users")
+    </h4>
 </div>
 <div class="alert-info col-sm-12 col-lg-12 col-md-12">
     @ViewBag.message

@@ -3,16 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Roles</h3>
+<h3 class="modal-header">Roles</h3>
 
 <div class="row col-sm-12 col-lg-12 col-md-12">
     <div class="col-sm-6 col-lg-6 col-md-6">
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card card-body">
+            <div class="card-header">
                 <h4>Create A New Role</h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 @using (Html.BeginForm("CreatingRole", "Roles", new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
@@ -22,19 +22,19 @@
                         Role name: @Html.TextBox("role")
                         <br />
                         <br />
-                        <input type="submit" value="Create Role" class="btn-primary" />
+                        <input type="submit" value="Create Role" class="btn btn-primary" />
                     </div>
                 }
             </div>
         </div>
+        <br />
 
-
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card card-body">
+            <div class="card-header">
                 <h4>Add a Role to a User</h4>
             </div>
 
-            <div class="panel-body">
+            <div class="card-body">
                 @using (Html.BeginForm("AddRoleToUser", "Roles", new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
@@ -43,17 +43,17 @@
                     <div>
                         <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
                         <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
-                        <input type="submit" value="Add role" class="btn-primary" />
+                        <input type="submit" value="Add role" class="btn btn-primary" />
                     </div>
                 }
             </div>
         </div>
-
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <br />
+        <div class="card card-body">
+            <div class="card-header">
                 <h4>Remove Role from User</h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 @using (Html.BeginForm("RemoveRoleFromUser", "Roles"))
                 {
                     @Html.AntiForgeryToken()
@@ -61,7 +61,7 @@
 
                     <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
                     <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
-                    <p><input type="submit" value="Delete this user from Role" class="btn-primary" /></p>
+                    <p><input type="submit" value="Delete this user from Role" class=" btn btn-primary" /></p>
 
                 }
             </div>
@@ -69,7 +69,7 @@
     </div>
 
     <div class="col-sm-6 col-lg-6 col-md-6">
-        <div class="panel panel-primary">
+        <div class="card card-body">
             <h3 class="media-middle">
                 <b>
                     &nbsp;
@@ -78,7 +78,8 @@
                 </b>
             </h3>
         </div>
-        <div class="panel panel-primary">
+        <br />
+        <div class="card card-body">
             <h3 class="media-middle">
                 <b>
                     &nbsp;
@@ -87,7 +88,8 @@
                 </b>
             </h3>
         </div>
-        <div class="panel panel-primary">
+        <br />
+        <div class="card card-body">
             <h3 class="media-middle">
                 <b>
                     &nbsp;

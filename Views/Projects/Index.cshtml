@@ -3,23 +3,22 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Projects</h2>
+<br />
 
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="box-title">
+<div class="card card-body">
+    <div class="card">
+        <h3 class="card-header">
             <b>Projects Info</b>
         </h3>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
             <thead>
                 <tr>
                     <h3>
                         <b>
                             <i class="fas fa-user-plus"></i>
-                            @Html.ActionLink("Add Project", "Add")
+                            @Html.ActionLink("Add Project", "Add", new { @class = "form-horizontal" })
                         </b>
                     </h3>
                 </tr>
@@ -29,6 +28,7 @@
                     <td><b>Project Name</b></td>
                     <td><b>Customer Name</b></td>
                     <td><b>Due Date</b></td>
+                    <td><b>Priority</b></td>
                     <td><b>Modification</b></td>
                 </tr>
             </thead>
@@ -38,7 +38,8 @@
                     <td>@Html.ActionLink(@project.Name, "Info", new { id = project.Id })</td>
                     <td>@project.Customer</td>
                     <td>@project.Deadline</td>
-                    <td class="col-sm-1 col-lg-1 col-md-1">
+                    <td>@project.Priority</td>
+                    <td>
                         @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
                         <span onclick="return confirm('Are you sure to delete?')"><a href="/Projects/Delete?ProjectId=@project.Id" class="delLink" style="color:red;">Delete</a></span>
                     </td>
@@ -50,7 +51,7 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back", "Index", "Roles")
+    <h4>@Html.ActionLink("Back", "Index", "Roles")</h4>
 </div>
 
 

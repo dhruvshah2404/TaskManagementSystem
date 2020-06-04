@@ -7,6 +7,13 @@ using System.Web;
 
 namespace TaskManagementSystem.Models
 {
+   public enum Priority
+    {
+        Urgent,
+        High,
+        Medium,
+        Low,
+    }
     public class Project
     {
         public Project()
@@ -14,7 +21,7 @@ namespace TaskManagementSystem.Models
             this.Tasks = new HashSet<Tasks>();
             this.ProjectUsers = new HashSet<ProjectUser>();
         }
-
+        public Priority? Priority { get; set; }
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }

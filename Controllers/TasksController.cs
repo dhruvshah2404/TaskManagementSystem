@@ -19,6 +19,7 @@ namespace TaskManagementSystem.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
+            
             var tasks = db.Tasks.Include(t => t.Project).Include(t => t.User);
             return View(tasks.ToList());
         }
@@ -51,11 +52,11 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string name, string description, int projectId, string userId,DateTime SubmissionDate)
+        public ActionResult Create(string name, string description, int projectId, string userId,DateTime SubmissionDate,Priority priority)
         {
             if (ModelState.IsValid)
             {
-                TaskHelper.Add(name, description, projectId, userId, SubmissionDate);
+                TaskHelper.Add(name, description, projectId, userId, SubmissionDate,priority);
             }
             return RedirectToAction("Info","Projects",new { id=projectId });
         }
@@ -72,7 +73,8 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-          
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", tasks.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", tasks.UserId);
             return View(tasks);
         }
 
@@ -114,9 +116,7 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tasks tasks = db.Tasks.Find(id);
-            db.Tasks.Remove(tasks);
-            db.SaveChanges();
+            TaskHelper.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -134,6 +134,37 @@ namespace TaskManagementSystem.Controllers
         {
             var tasks = db.Tasks.Where(t => t.UserId == id).ToList();
             return View(tasks);
+        }
+
+        [OverrideAuthorization]
+        [Authorize(Roles ="Developer")]
+        public ActionResult TaskDetails(int? id)
+        {
+            var task = db.Tasks.Find(id);
+            return View(task);
+        }
+
+        [OverrideAuthorization]
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TaskDetails(int? percentageCompleted,string UrgentNotes,int taskId)
+        {
+            var task = db.Tasks.First(t => t.Id == taskId);
+            
+            if (ModelState.IsValid)
+            {
+                task.percentageCompleted = percentageCompleted;
+                if (task.percentageCompleted==100)
+                {
+                    task.IsCompleted = true;
+                }
+                task.UrgenNotes.Add(UrgentNotes);
+                db.Entry(task).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("GetAllTasks",new { id=task.UserId});
+            }
+            return View(task); 
         }
     }
 }

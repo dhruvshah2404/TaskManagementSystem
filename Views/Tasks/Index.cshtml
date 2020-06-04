@@ -1,65 +1,86 @@
 ﻿@model IEnumerable<TaskManagementSystem.Models.Tasks>
+@using TaskManagementSystem.Models;
 
 @{
     ViewBag.Title = "Index";
+    var db = new ApplicationDbContext();
 }
 
-<h2>Index</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayName("Project Name")
-        </th>
-        <th>
-            @Html.DisplayName("Developer")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubmissionDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.percentageCompleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCompleted)
-        </th>
+<div class="card card-body">
+    <div class="card-header">
+        <h3 class="box-title">
+            <b>All tasks</b>
+        </h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
 
-        <th></th>
-    </tr>
+            <thead>
+                <tr>
+                    <td><b>Task Name</b></td>
+                    <td><b>Project Name</b></td>
+                    <td><b>Developer</b></td>
+                    <td><b>Submission Date</b></td>
+                    <td><b>Percentage Completed</b></td>
+                    <td><b>Is Completed</b></td>
+                    <td><b>Modify</b></td>
 
-@foreach (var item in Model) {
-<tr>
+                </tr>
+            </thead>
+            @foreach (var task in Model)
+            {
 
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Project.Name)
-    </td>
+                <tr>
+                    <td>@task.Name</td>
+                    <td>@task.Project.Name</td>
+                    <td>@task.User.UserName</td>
+                    <td>@task.SubmissionDate</td>
+                    <td>@task.percentageCompleted</td>
+                    <td>@task.IsCompleted</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = task.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = task.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = task.Id }) 
+                    </td>
+                </tr>
+            }
 
-    <td>
-        @Html.DisplayFor(modelItem => item.User.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SubmissionDate)
-    </td>
- 
-    <td>
-        @Html.DisplayFor(modelItem => item.percentageCompleted)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsCompleted)
-    </td>
+        </table>
+    </div>
+</div>
 
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
-}
+<br />
+<div class="card card-body">
+    <div class="card-header">
+        <h3 class="box-title">
+            <b>Completed tasks</b>
+        </h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
 
-</table>
+            <thead>
+                <tr>
+                    <td><b>Task Name</b></td>
+                    <td><b>Project Name</b></td>
+                    <td><b>Developer</b></td>
+                    <td><b>Submission Date</b></td>
+                </tr>
+            </thead>
+            @foreach (var task in db.CompletedTasks)
+            {
+
+                <tr>
+                    <td>@task.TaskName</td>
+                    <td>@task.ProjectName</td>
+                    <td>@task.DeveloperName</td>
+                    <td>@task.SubmissionDate</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<h4>@Html.ActionLink("Back", "Index","Roles")</h4>
+

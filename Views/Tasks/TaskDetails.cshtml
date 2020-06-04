@@ -1,0 +1,87 @@
+﻿@model TaskManagementSystem.Models.Tasks
+@{
+    ViewBag.Title = "TaskDetails";
+}
+
+<h3>@Model.Name</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row col-sm-12 col-lg-12 col-md-12">
+        <div class="col-sm-6 col-lg-6 col-md-6">
+
+            <div class="card card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayName("Project Name")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.percentageCompleted)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.percentageCompleted)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IsCompleted)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsCompleted)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SubmissionDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SubmissionDate)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 col-md-6">
+                <div class="card card-body">
+                    @Html.LabelFor(model => model.percentageCompleted, htmlAttributes: new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.percentageCompleted, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.percentageCompleted, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                        @Html.LabelFor(model => model.UrgenNotes, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="UrgentNotes" rows="6"></textarea>
+                        </div>
+                    <input type="text" style="display:none" name="taskId" value="@Model.Id" />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "GetAllTasks", new { id = Model.UserId })
+</div>
+

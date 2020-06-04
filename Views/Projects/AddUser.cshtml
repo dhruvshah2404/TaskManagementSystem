@@ -3,27 +3,30 @@
     ViewBag.Title = "AddUser";
 }
 
-<h3>Add Developers</h3>
+<h3 class="modal-header">Add Developer</h3>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <input type="text" class="hidden" name="ProjectId" value="@ViewBag.Project" />
+        <input type="text" style="display:none" name="ProjectId" value="@ViewBag.Project" />
         <div class="form-group">
-            @Html.LabelFor(model =>model.Id, "Developers", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Id, "Developers", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("UserId", null,"Select ...",new { @class = "form-control" })
+                @Html.DropDownList("UserId", null, "Select ...", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </div>
+    </div>
+    <div>
+        <h4>@Html.ActionLink("Back", "Info", new { id = ViewBag.Project })</h4>
     </div>
     <div class="alert-info col-sm-12 col-lg-12 col-md-12">
         @ViewBag.message

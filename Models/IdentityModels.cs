@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -41,6 +42,8 @@ namespace TaskManagementSystem.Models
         public DbSet<Project> Projects { get; set; }
 
 		public DbSet<Tasks> Tasks { get; set; }
+
+        public DbSet<CompletedTaskModel> CompletedTasks { get; set; }
 
         public DbSet<ProjectUser> ProjectUsers { get; set; }
 

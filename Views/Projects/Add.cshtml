@@ -3,14 +3,14 @@
     ViewBag.Title = "Add";
 }
 
-<h2>Add</h2>
+<br />
 
-<div class="panel panel-primary">
+<div class="card card-body">
 
-    <div class="panel-heading">
+    <div class="card-header">
         <h4>Add a Project</h4>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         @using (Html.BeginForm("Add", "Projects", new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
@@ -19,16 +19,19 @@
 
                 Project Name:@Html.Editor("name", new { htmlAttributes = new { @class = "form-control" } })<br />
                 Customer Name: @Html.Editor("customerName", new { htmlAttributes = new { @class = "form-control" } })<br />
-                Due Date: @Html.EditorFor(model => model.Deadline ,new { htmlAttributes = new { @class = "form-control" } })
+                Due Date: @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })<br />
+                Priority: @Html.EnumDropDownListFor(model => model.Priority, "Select Priority", new { htmlAttributes = new { @class = "form-control" } })
                 <br /><br />
-                <input type="submit" value="Create Project" class="btn-primary" />
+                <input type="submit" value="Create Project" class="btn btn-primary" />
             </div>
         }
     </div>
 </div>
 
 <div>
-    @Html.ActionLink("Back", "Index")
+    <h4>
+        @Html.ActionLink("Back", "Index")
+    </h4>
 </div>
 <div class="alert-info col-sm-12 col-lg-12 col-md-12">
     @ViewBag.message

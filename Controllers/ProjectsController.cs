@@ -15,7 +15,7 @@ namespace TaskManagementSystem.Controllers
     [Authorize(Roles = "Project Manager")]
     public class ProjectsController : Controller
     {
-     
+        
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Projects
@@ -29,9 +29,9 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Add(string name, string customerName, DateTime? deadline)
+        public ActionResult Add(string name, string customerName, DateTime? deadline,Priority priority)
         {
-            ProjectHelper.AddProject(name, customerName, deadline);
+            ProjectHelper.AddProject(name, customerName, deadline,priority);
             ViewBag.message = "Project created succesfully";
             return View();
         }
@@ -43,14 +43,39 @@ namespace TaskManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Name,Customer,Deadline,Priority")]Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(project);
+        }
         public ActionResult Info(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var project = db.Projects.Include(p => p.Tasks).Include(u => u.ProjectUsers).Single(x => x.Id == id);
-
+            var project = db.Projects.Include(t=>t.Tasks).Include(u => u.ProjectUsers)
+                .Where(x => x.Id == id)
+               .FirstOrDefault();
             if (id == null)
             {
                 return HttpNotFound();
@@ -100,11 +125,36 @@ namespace TaskManagementSystem.Controllers
             return View(ProjectUser);
         }
 
+        public ActionResult RemoveFromProject(int projectId,string userId)
+        {
+            var project = db.ProjectUsers.FirstOrDefault(p => p.ProjectId == projectId && p.UserId == userId);
+            db.ProjectUsers.Remove(project);
+            db.SaveChanges();
+            return RedirectToAction("Info", new { id = projectId });
+        }
+
         public ActionResult UserInfo(string UserId)
         {
             var user = db.Users.Find(UserId);
             return View(user);
         }
+        public ActionResult RemoveTask(int taskId,int projectId)
+        {
+            var task = db.Tasks.Find(taskId);
+            var compTask = new CompletedTaskModel();
+            compTask.TaskName = task.Name;
+            compTask.TaskId = taskId;
+            compTask.TaskDesc = task.Description;
+            compTask.SubmissionDate = task.SubmissionDate;
+            compTask.ProjectName = task.Project.Name;
+            compTask.DeveloperName = task.User.UserName;
+
+            db.CompletedTasks.Add(compTask);
+            db.Tasks.Remove(task);
+            db.SaveChanges();
+            return RedirectToAction("Info", "Projects", new { id = projectId });
+        }
+
     }
 
 }

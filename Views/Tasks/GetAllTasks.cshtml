@@ -5,7 +5,7 @@
 
 <h2>Get All Tasks</h2>
 
-<table class="table">
+<table class="table table-bordered table-hover" >
     <tr>
         <th>
             @Html.DisplayName("Task Name")
@@ -17,7 +17,7 @@
             @Html.DisplayName("Developer")
         </th>
         <th>
-            @Html.DisplayNameFor(model=>model.SubmissionDate)
+            @Html.DisplayNameFor(model => model.SubmissionDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.percentageCompleted)
@@ -25,15 +25,13 @@
         <th>
             @Html.DisplayNameFor(model => model.IsCompleted)
         </th>
-
-        <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.ActionLink(item.Name, "TaskDetails", new { id = item.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Name)
@@ -52,6 +50,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsCompleted)
             </td>
-            </tr>
-            }
+        </tr>
+    }
 </table>
+<div>
+    <h4>@Html.ActionLink("Back", "Index", "Home")</h4>
+</div>
+

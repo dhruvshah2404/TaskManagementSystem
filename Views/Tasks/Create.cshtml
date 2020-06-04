@@ -4,17 +4,16 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Tasks</h4>
+    <h4>Assign Task</h4>
     <hr />
-    <input type="text" class="hidden" name="projectId" value="@ViewBag.ProjectId" />
-    <input type="text" class="hidden" name="userId" value="@ViewBag.UserId" />
+    <input type="text" style="display:none" name="projectId" value="@ViewBag.ProjectId" />
+    <input type="text" style="display:none" name="userId" value="@ViewBag.UserId" />
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -28,11 +27,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextAreaFor(model => model.Description,new {rows="6",cols="40", htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Priority,"Select Priority", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.SubmissionDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -43,12 +49,11 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </div>
 </div>
-    }
-
+}
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h4><a href="/Projects/Info/@ViewBag.ProjectId">Back</a></h4>
 </div>
