@@ -256,6 +256,9 @@
     <Compile Include="Migrations\202006052102085_AddSortByPriorityProjectManager.cs" />
     <Compile Include="Migrations\202006052102085_AddSortByPriorityProjectManager.designer.cs">
       <DependentUpon>202006052102085_AddSortByPriorityProjectManager.cs</DependentUpon>
+    <Compile Include="Migrations\202006050103048_addedNotification.cs" />
+    <Compile Include="Migrations\202006050103048_addedNotification.designer.cs">
+      <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -569,6 +572,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006052102085_AddSortByPriorityProjectManager.resx">
       <DependentUpon>202006052102085_AddSortByPriorityProjectManager.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006050103048_addedNotification.resx">
+      <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
