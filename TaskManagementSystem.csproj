@@ -249,6 +249,10 @@
     <Compile Include="Migrations\202006032126018_nullablepriority.Designer.cs">
       <DependentUpon>202006032126018_nullablepriority.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006050103048_addedNotification.cs" />
+    <Compile Include="Migrations\202006050103048_addedNotification.designer.cs">
+      <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CompletedTaskModel.cs" />
@@ -554,6 +558,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006032126018_nullablepriority.resx">
       <DependentUpon>202006032126018_nullablepriority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006050103048_addedNotification.resx">
+      <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
