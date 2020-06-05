@@ -166,5 +166,57 @@ namespace TaskManagementSystem.Controllers
             }
             return View(task); 
         }
+
+        public ActionResult SortBasedOnPriority(int projectId)
+		{
+            // bug, the tasks are not located inside the task list of the project
+            // we are grabbing them from db.Tasks
+            var projectTasks = db.Tasks.Where(task => task.ProjectId == projectId).ToList();
+
+            // go through the list
+            // store each task to a list according to its priority
+            // and then loop through each list in order and add each element to the result List
+            List<Tasks> urgentPriorityList = new List<Tasks>();
+            List<Tasks> highPriorityList = new List<Tasks>();
+            List<Tasks> mediumPriorityList = new List<Tasks>();
+            List<Tasks> lowPriorityList = new List<Tasks>();
+            
+            // 0 for Urgent, 1 for High, 2 for Medium, 3 for Low
+            foreach (var task in projectTasks)
+			{
+                if (task.Priority.Value == Priority.Urgent)
+                    urgentPriorityList.Add(task);
+                else if (task.Priority.Value == Priority.High)
+                    highPriorityList.Add(task);
+                else if (task.Priority.Value == Priority.Medium)
+                    mediumPriorityList.Add(task);
+                else if (task.Priority.Value == Priority.Low)
+                    lowPriorityList.Add(task);
+			}
+
+            List<Tasks> result = new List<Tasks>();
+
+            foreach(var task in urgentPriorityList)
+			{
+                result.Add(task);
+			}
+
+            foreach(var task in highPriorityList)
+			{
+                result.Add(task);
+			}
+
+            foreach(var task in mediumPriorityList)
+			{
+                result.Add(task);
+			}
+
+            foreach(var task in lowPriorityList)
+			{
+                result.Add(task);
+			}
+
+            return View(result);
+		}
     }
 }
