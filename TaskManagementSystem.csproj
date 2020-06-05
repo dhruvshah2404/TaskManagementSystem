@@ -249,13 +249,6 @@
     <Compile Include="Migrations\202006032126018_nullablepriority.Designer.cs">
       <DependentUpon>202006032126018_nullablepriority.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006042250353_ImplementedNotificationInSystemDesign.cs" />
-    <Compile Include="Migrations\202006042250353_ImplementedNotificationInSystemDesign.designer.cs">
-      <DependentUpon>202006042250353_ImplementedNotificationInSystemDesign.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006052102085_AddSortByPriorityProjectManager.cs" />
-    <Compile Include="Migrations\202006052102085_AddSortByPriorityProjectManager.designer.cs">
-      <DependentUpon>202006052102085_AddSortByPriorityProjectManager.cs</DependentUpon>
     <Compile Include="Migrations\202006050103048_addedNotification.cs" />
     <Compile Include="Migrations\202006050103048_addedNotification.designer.cs">
       <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
@@ -501,7 +494,6 @@
     <Content Include="Views\Tasks\GetAllTasks.cshtml" />
     <Content Include="Views\Tasks\TaskDetails.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Tasks\SortBasedOnPriority.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -567,11 +559,6 @@
     <EmbeddedResource Include="Migrations\202006032126018_nullablepriority.resx">
       <DependentUpon>202006032126018_nullablepriority.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006042250353_ImplementedNotificationInSystemDesign.resx">
-      <DependentUpon>202006042250353_ImplementedNotificationInSystemDesign.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006052102085_AddSortByPriorityProjectManager.resx">
-      <DependentUpon>202006052102085_AddSortByPriorityProjectManager.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202006050103048_addedNotification.resx">
       <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
     </EmbeddedResource>
