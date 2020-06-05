@@ -14,6 +14,7 @@
         </h3>
     </div>
     <div class="card-body">
+        @Html.ActionLink("Sort Based On priority","SortBasedOnPriority","Tasks", new { projectId = Model.ElementAt(0).ProjectId },"")
         <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
 
             <thead>
@@ -24,6 +25,7 @@
                     <td><b>Submission Date</b></td>
                     <td><b>Percentage Completed</b></td>
                     <td><b>Is Completed</b></td>
+                    <td><b>Priority</b></td>
                     <td><b>Modify</b></td>
 
                 </tr>
@@ -38,6 +40,7 @@
                     <td>@task.SubmissionDate</td>
                     <td>@task.percentageCompleted</td>
                     <td>@task.IsCompleted</td>
+                    <td>@task.Priority</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = task.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = task.Id }) |
