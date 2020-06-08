@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -21,6 +22,10 @@ namespace TaskManagementSystem.Models
 		public ICollection<ProjectUser> ProjectUsers { get; set; }
 		public ICollection<Tasks> Tasks { get; set; }
 		public ICollection<Notification> Notifications { get; set; }
+
+		[Display(Name = "Daily Salary")]
+		public double? DailySalary { get; set; }
+
 		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
 		{
 			// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -46,8 +51,6 @@ namespace TaskManagementSystem.Models
 		public DbSet<Tasks> Tasks { get; set; }
 
 		public DbSet<Notification> Notifications { get; set; }
-
-		public DbSet<CompletedTaskModel> CompletedTasks { get; set; }
 
 		public DbSet<ProjectUser> ProjectUsers { get; set; }
 

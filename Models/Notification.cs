@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Models
 {
+
 	public enum NotificationStatus
 	{
 		Read,
@@ -19,10 +21,28 @@ namespace TaskManagementSystem.Models
 
 	public class Notification
 	{
+
 		public int Id { get; set; }
 		public string Message { get; set; }
 		public NotificationStatus Status { get; set; }
-		public int UserId { get; set; }
+		public string UserId { get; set; }
 		public virtual ApplicationUser User { get; set; }
+
+		public static void GenerateNotification(string message, string userId)
+		{   
+			ApplicationDbContext db = new ApplicationDbContext();
+
+		//PM - Task or project completed
+		//PM - 
+			var notification = new Notification()
+			{
+				Message = message,
+				UserId = userId,
+				Status = NotificationStatus.Unread
+			};
+			db.Notifications.Add(notification);
+			db.SaveChanges();
+		}
+
 	}
 }

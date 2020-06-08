@@ -21,17 +21,20 @@ namespace TaskManagementSystem.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            var ProjectList = db.Projects.ToList();
+            var ProjectList = db.Projects.OrderBy(p=>p.Priority).ToList();
             return View(ProjectList);
         }
+
         public ActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Add(string name, string customerName, DateTime? deadline,Priority priority)
+        public ActionResult Add(string name, string customerName, DateTime? deadline,Priority priority,double budget)
         {
-            ProjectHelper.AddProject(name, customerName, deadline,priority);
+            
+            ProjectHelper.AddProject(name, customerName, deadline,priority,budget);
             ViewBag.message = "Project created succesfully";
             return View();
         }
@@ -56,8 +59,9 @@ namespace TaskManagementSystem.Controllers
             }
             return View(project);
         }
+
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Name,Customer,Deadline,Priority")]Project project)
+        public ActionResult Edit([Bind(Include = "Name,Customer,Deadline,Priority,Budget")]Project project)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +71,8 @@ namespace TaskManagementSystem.Controllers
             }
             return View(project);
         }
-        public ActionResult Info(int? id)
+
+        public ActionResult Info(int? id,string OrderBy)
         {
             if (id == null)
             {
@@ -76,12 +81,26 @@ namespace TaskManagementSystem.Controllers
             var project = db.Projects.Include(t=>t.Tasks).Include(u => u.ProjectUsers)
                 .Where(x => x.Id == id)
                .FirstOrDefault();
+            if (OrderBy=="priority")
+            {
+                ViewBag.taskList = project.Tasks.OrderBy(t => t.Priority);
+
+            }
+            else if(OrderBy=="percent")
+            {
+                ViewBag.taskList = project.Tasks.OrderByDescending(t => t.percentageCompleted);
+            }
+            else 
+            {
+                ViewBag.taskList = project.Tasks.OrderByDescending(t => t.percentageCompleted);
+            }
             if (id == null)
             {
                 return HttpNotFound();
             }
             return View(project);
         }
+
         public ActionResult AddUser(int projectId)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -92,22 +111,27 @@ namespace TaskManagementSystem.Controllers
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.UserId = new SelectList(developers, "Id", "UserName");
             ViewBag.Project = projectId;
-            //var project = db.Projects.Find(projectId);
             return View();
         }
+
         [HttpPost]
         public ActionResult AddUser(int ProjectId, string UserId)
         {
-
-
             var ProjectUser = new ProjectUser() { ProjectId = ProjectId, UserId = UserId };
             if (ModelState.IsValid)
             {
                 if (!db.ProjectUsers.Any(p=>p.ProjectId==ProjectId && p.UserId==UserId))
                 {
-                    db.ProjectUsers.Add(ProjectUser);
-                    db.SaveChanges();
-                    return RedirectToAction("Info", new { id = ProjectId });
+                    try
+                    {
+                        db.ProjectUsers.Add(ProjectUser);
+                        db.SaveChanges();
+                        return RedirectToAction("Info", new { id = ProjectId });
+                    }
+                    catch (Exception )
+                    {
+
+                    }
                 }
                 else
                 {
@@ -138,22 +162,7 @@ namespace TaskManagementSystem.Controllers
             var user = db.Users.Find(UserId);
             return View(user);
         }
-        public ActionResult RemoveTask(int taskId,int projectId)
-        {
-            var task = db.Tasks.Find(taskId);
-            var compTask = new CompletedTaskModel();
-            compTask.TaskName = task.Name;
-            compTask.TaskId = taskId;
-            compTask.TaskDesc = task.Description;
-            compTask.SubmissionDate = task.SubmissionDate;
-            compTask.ProjectName = task.Project.Name;
-            compTask.DeveloperName = task.User.UserName;
 
-            db.CompletedTasks.Add(compTask);
-            db.Tasks.Remove(task);
-            db.SaveChanges();
-            return RedirectToAction("Info", "Projects", new { id = projectId });
-        }
 
     }
 

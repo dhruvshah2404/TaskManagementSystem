@@ -29,16 +29,22 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Roles</th>
+                    <th>Daily Salary ($)</th>
+                    <th>Modification</th>
                 </tr>
             </thead>
             @foreach (var user in Model)
             {
-                <tr>
-                    <td>@user.Username</td>
-                    <td>@user.Email</td>
-                    <td>@user.Role</td>
-
-                </tr>
+        <tr>
+            <td>@user.Username</td>
+            <td>@user.Email</td>
+            <td>@user.Role</td>
+            <td>@user.Salary</td>
+            <td>
+                @Html.ActionLink("Edit", "EditUser", new { id = @user.UserId }) |
+                <span onclick="return confirm('Are you sure to delete?')"><a href="/Roles/DeleteUser?id=@user.UserId" class="delLink" style="color:red;">Delete</a></span>
+            </td>
+        </tr>
 
             }
         </table>

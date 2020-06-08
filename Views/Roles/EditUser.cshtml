@@ -1,0 +1,52 @@
+﻿@model TaskManagementSystem.Models.ApplicationUser
+@{
+    ViewBag.Title = "EditUser";
+}
+
+
+
+<br />
+
+<div class="card card-body">
+
+    <div class="card-header bg-dark text-light">
+        <h4>Edit @Model.UserName</h4>
+    </div>
+    <div class="card-body ">
+        @using (Html.BeginForm("EditUser", "Roles", new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+        <div>
+
+            <input type="text" class="d-none" name="UserId" value="@Model.Id" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DailySalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DailySalary, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DailySalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <input type="submit" value="Edit" class="btn btn-primary" />
+        </div>
+        }
+    </div>
+</div>
+
+<div>
+    <h4>
+        @Html.ActionLink("Back", "Users")
+    </h4>
+</div>

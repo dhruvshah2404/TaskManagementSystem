@@ -8,7 +8,13 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @using TaskManagementSystem.Models;
-    
+    @using Microsoft.AspNet.Identity
+    @{
+        ApplicationDbContext db = new ApplicationDbContext();
+        var user = db.Users.Find(User.Identity.GetUserId());
+
+
+    }
     <script src="https://kit.fontawesome.com/2719b0957c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -23,27 +29,89 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/Roles">Roles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Roles/Users">Users</a>
-                </li>
+                @if (User.IsInRole("Developer"))
+                {
+                    var unreadnotification = db.Notifications.Where(n => n.Status == NotificationStatus.Unread && n.UserId == user.Id).ToList();
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/Tasks">Tasks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Tasks">Tasks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Notifactions">
-                        <i class="far fa-bell">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            <span class="badge"></span>
-                        </i>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="/Roles">Roles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="/Roles/Users">Users</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="/Projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Tasks/GetAllTasks/@user.Id"> <h4>My Tasks</h4></a>
+                    </li>
+                    <li>
+                        <a href="/Notifications/Index?id=@user.Id">
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge">@unreadnotification.Count</span>
+                                </button>
+
+                                <div class="dropdown-content">
+                                    @foreach (var item in unreadnotification)
+                                    {
+                                        <a class="notification" href="/Notifications/Info?id=@item.Id">
+                                            <span class="list-inline-item">@item.Id) </span>
+                                            <span class=""> @item.Message.</span>
+                                            <span class="float-right">@item.Status</span>
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+
+                }
+                else if (User.IsInRole("Project Manager"))
+                {
+                    var unreadnotification = db.Notifications.Where(n => n.Status == NotificationStatus.Unread && n.UserId == user.Id).ToList();
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Roles">Roles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Roles/Users">Users</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Tasks/">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Notifications/Index?id=@user.Id">
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge" id="noticount">@unreadnotification.Count</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    @foreach (var item in unreadnotification)
+                                    {
+                                        <a class="notification" href="/Notifications/Info?id=@item.Id">
+                                            <span class="list-inline-item">@item.Id) </span>
+                                            <span class=""> @item.Message.</span>
+                                            <span class="float-right">@item.Status</span>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+
+                }
+
             </ul>
 
             @Html.Partial("_LoginPartial")

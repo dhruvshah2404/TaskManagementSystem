@@ -16,22 +16,15 @@ namespace TaskManagementSystem.Models
 			(new RoleStore<IdentityRole>(db));
 
 		//Add User
-		public static void CreateUser(string email, string password = "Examplepass1!")
+		public static void CreateUser(string email, double? dailySalary, string password = "Examplepass1!")
 		{
-			ApplicationUser user = new ApplicationUser();
+			ApplicationUser user = new ApplicationUser() { Email=email,UserName=email,DailySalary=dailySalary};
 			user.Email = email;
 			user.UserName = email;
 
 			userManager.Create(user, password);
 			db.SaveChanges();
 
-		}
-		//Delete User
-		public static void RemoveUser(string email)
-		{
-			var user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
-			userManager.Delete(user);
-			db.SaveChanges();
 		}
 		//Create Role
 		public static bool CreateRole(string roleName)
@@ -72,7 +65,6 @@ namespace TaskManagementSystem.Models
 			}
 			else
 			{
-
 				userManager.AddToRole(userId, role);
 				db.SaveChanges();
 				return true;

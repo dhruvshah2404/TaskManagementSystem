@@ -5,8 +5,7 @@
 }
 
     <div class="jumbotron">
-        <h2>Welcome to JDJ Task Management System</h2>
-        @Html.ActionLink("My Tasks", "GetAllTasks","Tasks", new { id = currentUser},"")
+        <h3>Welcome to JDJ Task Management System @User.Identity.GetUserName().Split('@')[0].ToUpperInvariant()</h3>
     </div>
 
 <div class="row">

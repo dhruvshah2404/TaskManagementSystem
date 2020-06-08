@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TaskManagementSystem.Models.Notification>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<div class="card card-body">
+    <div class="card-header">
+        <h3 class="box-title">
+            <b>All notifications</b>
+        </h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+
+            <thead>
+                <tr>
+                    <td><b>Id</b></td>
+                    <td><b>Message</b></td>
+                    <td><b>Status</b></td>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td><a href="/Notifications/Info?id=@item.Id">@item.Message</a></td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<h4>@Html.ActionLink("Back", "Index","Home","","")</h4>

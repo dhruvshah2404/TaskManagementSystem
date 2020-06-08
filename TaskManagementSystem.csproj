@@ -163,6 +163,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -253,9 +254,24 @@
     <Compile Include="Migrations\202006050103048_addedNotification.designer.cs">
       <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006060518563_deletedCompletedTasks.cs" />
+    <Compile Include="Migrations\202006060518563_deletedCompletedTasks.designer.cs">
+      <DependentUpon>202006060518563_deletedCompletedTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006061759573_addedbudgettoproject.cs" />
+    <Compile Include="Migrations\202006061759573_addedbudgettoproject.designer.cs">
+      <DependentUpon>202006061759573_addedbudgettoproject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006061849424_addedSalaryToUser.cs" />
+    <Compile Include="Migrations\202006061849424_addedSalaryToUser.designer.cs">
+      <DependentUpon>202006061849424_addedSalaryToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006072232163_addedNotificationSystem.cs" />
+    <Compile Include="Migrations\202006072232163_addedNotificationSystem.designer.cs">
+      <DependentUpon>202006072232163_addedNotificationSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CompletedTaskModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs" />
@@ -494,6 +510,9 @@
     <Content Include="Views\Tasks\GetAllTasks.cshtml" />
     <Content Include="Views\Tasks\TaskDetails.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Roles\EditUser.cshtml" />
+    <Content Include="Views\Notifications\Info.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +580,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006050103048_addedNotification.resx">
       <DependentUpon>202006050103048_addedNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006060518563_deletedCompletedTasks.resx">
+      <DependentUpon>202006060518563_deletedCompletedTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006061759573_addedbudgettoproject.resx">
+      <DependentUpon>202006061759573_addedbudgettoproject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006061849424_addedSalaryToUser.resx">
+      <DependentUpon>202006061849424_addedSalaryToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006072232163_addedNotificationSystem.resx">
+      <DependentUpon>202006072232163_addedNotificationSystem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,7 +18,6 @@ namespace TaskManagementSystem.Controllers
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Tasks
         public ActionResult Index()
         {
             
@@ -24,7 +25,6 @@ namespace TaskManagementSystem.Controllers
             return View(tasks.ToList());
         }
 
-        // GET: Tasks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,7 +39,6 @@ namespace TaskManagementSystem.Controllers
             return View(tasks);
         }
 
-        // GET: Tasks/Create
         public ActionResult Create(int projectId,string userId)
         {
             ViewBag.ProjectId = projectId;
@@ -47,21 +46,17 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
 
-        // POST: Tasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string name, string description, int projectId, string userId,DateTime SubmissionDate,Priority priority)
+        public ActionResult Create(string name, string description, int projectId, string userId, DateTime SubmissionDate, Priority priority)
         {
             if (ModelState.IsValid)
             {
-                TaskHelper.Add(name, description, projectId, userId, SubmissionDate,priority);
+               TaskHelper.Add(name, description, projectId, userId, SubmissionDate, priority);
             }
             return RedirectToAction("Info","Projects",new { id=projectId });
         }
 
-        // GET: Tasks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,15 +73,16 @@ namespace TaskManagementSystem.Controllers
             return View(tasks);
         }
 
-        // POST: Tasks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId")] Tasks tasks)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,percentageCompleted,IsCompleted,SubmissionDate,ProjectId,UserId,Priority")] Tasks tasks)
         {
             if (ModelState.IsValid)
             {
+                if (tasks.percentageCompleted==100)
+                {
+                    tasks.IsCompleted = true;
+                }
                 db.Entry(tasks).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,7 +92,6 @@ namespace TaskManagementSystem.Controllers
             return View(tasks);
         }
 
-        // GET: Tasks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,7 +106,6 @@ namespace TaskManagementSystem.Controllers
             return View(tasks);
         }
 
-        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -151,14 +145,30 @@ namespace TaskManagementSystem.Controllers
         public ActionResult TaskDetails(int? percentageCompleted,string UrgentNotes,int taskId)
         {
             var task = db.Tasks.First(t => t.Id == taskId);
-            
+
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            var projectManagerId = roleManager.FindByName("Project Manager").Users.Select(u => u.UserId).FirstOrDefault();
+
             if (ModelState.IsValid)
             {
+                //Generate notification for urgentnote to project manager
+                if (UrgentNotes.Length>1)
+                {
+                    string message = UrgentNotes +"from"+ task.User.UserName;
+                    Notification.GenerateNotification(message,projectManagerId);
+                }
+                //end//
                 task.percentageCompleted = percentageCompleted;
                 if (task.percentageCompleted==100)
                 {
                     task.IsCompleted = true;
+                    string message = task.Name + " is completed by "+task.User.UserName ;
+                    Notification.GenerateNotification(message, projectManagerId);
+
                 }
+
                 task.UrgenNotes.Add(UrgentNotes);
                 db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();

@@ -5,7 +5,7 @@
 
 <h2>Get All Tasks</h2>
 
-<table class="table table-bordered table-hover" >
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayName("Task Name")
@@ -18,6 +18,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SubmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.percentageCompleted)
@@ -43,7 +46,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SubmissionDate)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.percentageCompleted)
             </td>

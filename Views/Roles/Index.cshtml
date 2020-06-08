@@ -19,8 +19,7 @@
                     @Html.ValidationSummary(true)
 
                     <div>
-                        Role name: @Html.TextBox("role")
-                        <br />
+                        Role name: @Html.TextBox("role", "", new { @class = "form-control" })
                         <br />
                         <input type="submit" value="Create Role" class="btn btn-primary" />
                     </div>
@@ -41,8 +40,8 @@
                     @Html.ValidationSummary(true)
 
                     <div>
-                        <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
-                        <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                        <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...",new { @class="form-control"})</p>
+                        <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...",new { @class="form-control"})</p>
                         <input type="submit" value="Add role" class="btn btn-primary" />
                     </div>
                 }
@@ -59,8 +58,8 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
-                    <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...")</p>
-                    <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                    <p>User Name: @Html.DropDownList("email", (IEnumerable<SelectListItem>)ViewBag.Users, "Select ...",new { @class="form-control"})</p>
+                    <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...",new { @class="form-control"})</p>
                     <p><input type="submit" value="Delete this user from Role" class=" btn btn-primary" /></p>
 
                 }

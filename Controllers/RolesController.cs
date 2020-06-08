@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace TaskManagementSystem.Controllers
     public class RolesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Roles
+
         public ActionResult Index()
         {
 
@@ -25,10 +26,13 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
 
+        //GET:CREATE ROLE
         public ActionResult CreatingRole()
         {
             return View();
         }
+
+        //POST: CREATE ROLE
         [HttpPost]
         public ActionResult CreatingRole(string role)
         {
@@ -43,10 +47,12 @@ namespace TaskManagementSystem.Controllers
                 return View();
             }
         }
+        //GET
         public ActionResult AddRoleToUser()
         {
             return View();
         }
+        //POST
         [HttpPost]
         public ActionResult AddRoleToUser(string email, string role)
         {
@@ -66,10 +72,12 @@ namespace TaskManagementSystem.Controllers
             ViewBag.Users = userList;
             return View("Index");
         }
+        //GET
         public ActionResult RemoveRoleFromUser()
         {
             return View();
         }
+        //POST
         [HttpPost]
         public ActionResult RemoveRoleFromUser(string email, string role)
         {
@@ -89,6 +97,7 @@ namespace TaskManagementSystem.Controllers
             ViewBag.Users = userList;
             return View("Index");
         }
+
         public ActionResult Users()
         {
             var usersWithRoles = (from user in db.Users
@@ -97,6 +106,7 @@ namespace TaskManagementSystem.Controllers
                                       UserId = user.Id,
                                       Username = user.UserName,
                                       Email = user.Email,
+                                      DailySalary=user.DailySalary,
                                       RoleNames = (from userRole in user.Roles
                                                    join role in db.Roles on userRole.RoleId
                                                    equals role.Id
@@ -107,22 +117,25 @@ namespace TaskManagementSystem.Controllers
                                       UserId = p.UserId,
                                       Username = p.Username,
                                       Email = p.Email,
+                                      Salary=p.DailySalary,
                                       Role = string.Join(",", p.RoleNames)
                                   });
 
 
             return View(usersWithRoles);
         }
+        //GET
         public ActionResult AddUser()
         {
             var roleList = db.Roles.Select(roles => new SelectListItem { Value = roles.Name.ToString(), Text = roles.Name }).ToList();
             ViewBag.Roles = roleList;
             return View();
         }
+        //POST
         [HttpPost]
-        public ActionResult AddUser(string email, string role)
+        public ActionResult AddUser(string email, string role,double? dailySalary)
         {
-            UserHelper.CreateUser(email);
+            UserHelper.CreateUser(email,dailySalary);
             ApplicationUser user = db.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
             UserHelper.AddRoleToUser(user.Id, role);
             ViewBag.message = "User Created Succesfully";
@@ -131,6 +144,46 @@ namespace TaskManagementSystem.Controllers
             var userList = db.Users.Select(users => new SelectListItem { Value = users.UserName.ToString(), Text = users.UserName }).ToList();
             ViewBag.Users = userList;
             return View();
+        }
+        public ActionResult DeleteUser(string id)
+        {
+            var user = db.Users.Find(id);
+            var prouser = db.ProjectUsers.Where(pj => pj.UserId == id).ToList();
+            foreach (var p in prouser)
+            {
+                db.ProjectUsers.Remove(p);
+                db.SaveChanges();
+            }
+            var tasks=db.Tasks.Where(t => t.UserId == id).ToList();
+            foreach (var task in tasks)
+            {
+                db.Tasks.Remove(task);
+                db.SaveChanges();
+            }
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Users");
+        }
+        //Get
+        public ActionResult EditUser(string id)
+        {
+            var user = db.Users.Find(id);
+
+            return View(user);
+        }
+        //Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser(string Email,double DailySalary,string UserId)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Find(UserId);
+                user.Email = Email;
+                user.DailySalary = DailySalary;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Users");
         }
 
     }

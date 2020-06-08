@@ -18,7 +18,8 @@
 
             <div>
                 Email: @Html.TextBox("email", "", new { @class = "form-control" })<br />
-                <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
+                <p>Role Name: @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...",new { @class="form-control"})</p>
+                Daily Salary: @Html.TextBox("dailySalary","",new { @class="form-control"})<br />
                 <input type="submit" value="Create User" class="btn btn-primary" />
             </div>
         }

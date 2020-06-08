@@ -23,6 +23,7 @@
                     <td><b>Developer</b></td>
                     <td><b>Submission Date</b></td>
                     <td><b>Percentage Completed</b></td>
+                    <td><b>Priority</b></td>
                     <td><b>Is Completed</b></td>
                     <td><b>Modify</b></td>
 
@@ -31,56 +32,25 @@
             @foreach (var task in Model)
             {
 
-                <tr>
-                    <td>@task.Name</td>
-                    <td>@task.Project.Name</td>
-                    <td>@task.User.UserName</td>
-                    <td>@task.SubmissionDate</td>
-                    <td>@task.percentageCompleted</td>
-                    <td>@task.IsCompleted</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = task.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = task.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = task.Id }) 
-                    </td>
-                </tr>
+        <tr>
+            <td>@task.Name</td>
+            <td>@task.Project.Name</td>
+            <td>@task.User.UserName</td>
+            <td>@task.SubmissionDate</td>
+            <td>@task.percentageCompleted</td>
+            <td>@task.Priority</td>
+            <td>@task.IsCompleted</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = task.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = task.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = task.Id })
+            </td>
+        </tr>
             }
 
         </table>
     </div>
 </div>
 
-<br />
-<div class="card card-body">
-    <div class="card-header">
-        <h3 class="box-title">
-            <b>Completed tasks</b>
-        </h3>
-    </div>
-    <div class="card-body">
-        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
-
-            <thead>
-                <tr>
-                    <td><b>Task Name</b></td>
-                    <td><b>Project Name</b></td>
-                    <td><b>Developer</b></td>
-                    <td><b>Submission Date</b></td>
-                </tr>
-            </thead>
-            @foreach (var task in db.CompletedTasks)
-            {
-
-                <tr>
-                    <td>@task.TaskName</td>
-                    <td>@task.ProjectName</td>
-                    <td>@task.DeveloperName</td>
-                    <td>@task.SubmissionDate</td>
-                </tr>
-            }
-
-        </table>
-    </div>
-</div>
 <h4>@Html.ActionLink("Back", "Index","Roles")</h4>
 

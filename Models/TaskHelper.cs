@@ -16,15 +16,10 @@ namespace TaskManagementSystem.Models
 		public static bool Add(string name,string description, int projectId, string userId, DateTime submissionDate,Priority priority)
 		{
 			// create a new task object
-			Tasks newTask = new Tasks() { IsCompleted = false,percentageCompleted=0};
+			Tasks newTask = new Tasks() {Name=name,Description=description,ProjectId=projectId,UserId=userId,SubmissionDate=submissionDate,Priority=priority, IsCompleted = false,percentageCompleted=0,};
 
 			// add all the data inside
-			newTask.Name = name;
-			newTask.Description = description;
-			newTask.ProjectId = projectId;
-			newTask.UserId = userId;
-			newTask.SubmissionDate = submissionDate;
-			newTask.Priority = priority;
+		
 			// put it in the database
 			db.Tasks.Add(newTask);
 			db.SaveChanges();
